@@ -1,4 +1,4 @@
-package com.microservices.authservice;
+package com.microservices.authservice.jwtAuthoritation;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

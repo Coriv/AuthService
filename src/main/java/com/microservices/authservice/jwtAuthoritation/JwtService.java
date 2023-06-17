@@ -1,4 +1,4 @@
-package com.microservices.authservice;
+package com.microservices.authservice.jwtAuthoritation;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

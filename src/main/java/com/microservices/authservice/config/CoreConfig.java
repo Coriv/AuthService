@@ -1,4 +1,4 @@
-package com.microservices.authservice;
+package com.microservices.authservice.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -22,9 +22,9 @@ public class CoreConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
-        users.setUsersByUsernameQuery("SELECT username, password, active FROM USERS" +
+        users.setUsersByUsernameQuery("SELECT username, password, active FROM AUTHENTICATION" +
                 " WHERE username = ?");
-        users.setAuthoritiesByUsernameQuery("SELECT username, authority FROM USERS" +
+        users.setAuthoritiesByUsernameQuery("SELECT username, authority FROM AUTHENTICATION" +
                 " WHERE username = ?");
         return users;
     }

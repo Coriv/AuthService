@@ -1,9 +1,8 @@
-package com.microservices.authservice;
+package com.microservices.authservice.user;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,21 +16,20 @@ import java.util.Collection;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Table(name = "User")
-public class User implements UserDetails {
+@Table(indexes = @Index(columnList = "username"))
+public class Authentication implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     @Column(unique = true)
-    @Email
-    private String email;
     private String username;
     private String password;
-    private boolean active;
     @Enumerated(EnumType.STRING)
     private Role authority;
+    private boolean active;
+    @NotNull
+    private Long userId;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -50,7 +48,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return active;
     }
 
     @Override
