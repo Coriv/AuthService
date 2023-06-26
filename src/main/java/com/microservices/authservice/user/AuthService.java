@@ -13,15 +13,13 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final AuthDao authDao;
-    private final AuthMapper authMapper;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public Authentication saveAuth(AuthenticationDto authenticationDto) {
-        var user = authMapper.toAuth(authenticationDto);
-        user.setPassword(passwordEncoder.encode(authenticationDto.getPassword()));
-        return authDao.save(user);
+    public Authentication saveAuth(Authentication auth) {
+        auth.setPassword(passwordEncoder.encode(auth.getPassword()));
+        return authDao.save(auth);
     }
 
     public String authenticate(AuthenticationDto authenticationDto) {

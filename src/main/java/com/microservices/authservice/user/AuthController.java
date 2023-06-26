@@ -12,17 +12,18 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
+    private final AuthMapper authMapper;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody AuthenticationDto authenticationDto) {
-        var user = authService.saveAuth(authenticationDto);
-        return ResponseEntity.ok(authService.authenticate(authenticationDto));
-        // todo fix method and controller (inject mapper to controller)
+    public ResponseEntity<String> registerUser(@RequestBody AuthenticationDto authDto) {
+        var auth = authMapper.toAuth(authDto);
+        authService.saveAuth(auth);
+        return ResponseEntity.ok(authService.authenticate(authDto));
     }
 
     @GetMapping(value = "/token", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getToken(@RequestBody AuthenticationDto authenticationDto) {
-        var token = authService.authenticate(authenticationDto);
+    public ResponseEntity<String> getToken(@RequestBody AuthenticationDto authDto) {
+        var token = authService.authenticate(authDto);
         return ResponseEntity.ok(token);
     }
 
