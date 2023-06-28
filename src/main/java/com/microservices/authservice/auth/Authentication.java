@@ -1,4 +1,4 @@
-package com.microservices.authservice.user;
+package com.microservices.authservice.auth;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

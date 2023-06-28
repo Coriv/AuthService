@@ -1,4 +1,4 @@
-package com.microservices.authservice.user;
+package com.microservices.authservice.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

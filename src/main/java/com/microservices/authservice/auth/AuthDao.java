@@ -1,4 +1,4 @@
-package com.microservices.authservice.user;
+package com.microservices.authservice.auth;
 
 import jakarta.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;

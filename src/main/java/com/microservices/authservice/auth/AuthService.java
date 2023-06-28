@@ -1,6 +1,6 @@
-package com.microservices.authservice.user;
+package com.microservices.authservice.auth;
 
-import com.microservices.authservice.exception.UserIdNotFoundException;
+import com.microservices.authservice.exception.AuthIdNotFoundException;
 import com.microservices.authservice.jwtAuthoritation.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,14 +38,14 @@ public class AuthService {
         jwtService.isTokenValid(token);
     }
 
-    public void blockUser(Long userId) throws UserIdNotFoundException {
-        var user = authDao.findByUserId(userId).orElseThrow(UserIdNotFoundException::new);
+    public void blockUser(Long userId) throws AuthIdNotFoundException {
+        var user = authDao.findByUserId(userId).orElseThrow(AuthIdNotFoundException::new);
         user.setActive(false);
         authDao.save(user);
     }
 
-    public void unblockUser(Long userId) throws UserIdNotFoundException {
-        var user = authDao.findByUserId(userId).orElseThrow(UserIdNotFoundException::new);
+    public void unblockUser(Long userId) throws AuthIdNotFoundException {
+        var user = authDao.findByUserId(userId).orElseThrow(AuthIdNotFoundException::new);
         user.setActive(false);
         authDao.save(user);
     }

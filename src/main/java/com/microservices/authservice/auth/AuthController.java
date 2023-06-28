@@ -1,13 +1,13 @@
-package com.microservices.authservice.user;
+package com.microservices.authservice.auth;
 
-import com.microservices.authservice.exception.UserIdNotFoundException;
+import com.microservices.authservice.exception.AuthIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -34,13 +34,13 @@ public class AuthController {
     }
 
     @PutMapping("/block")
-    public ResponseEntity<Void> blockUser(@RequestParam Long userId) throws UserIdNotFoundException {
+    public ResponseEntity<Void> blockUser(@RequestParam Long userId) throws AuthIdNotFoundException {
         authService.blockUser(userId);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/unblock")
-    public ResponseEntity<Void> unblockUser(@RequestParam Long userId) throws UserIdNotFoundException {
+    public ResponseEntity<Void> unblockUser(@RequestParam Long userId) throws AuthIdNotFoundException {
         authService.unblockUser(userId);
         return ResponseEntity.ok().build();
     }
