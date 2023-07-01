@@ -1,6 +1,6 @@
 package com.microservices.authservice.auth;
 
-import com.microservices.authservice.exception.AuthIdNotFoundException;
+import com.microservices.authservice.exception.UserIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,14 +34,20 @@ public class AuthController {
     }
 
     @PutMapping("/block")
-    public ResponseEntity<Void> blockUser(@RequestParam Long userId) throws AuthIdNotFoundException {
+    public ResponseEntity<Void> blockUser(@RequestParam Long userId) throws UserIdNotFoundException {
         authService.blockUser(userId);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/unblock")
-    public ResponseEntity<Void> unblockUser(@RequestParam Long userId) throws AuthIdNotFoundException {
+    public ResponseEntity<Void> unblockUser(@RequestParam Long userId) throws UserIdNotFoundException {
         authService.unblockUser(userId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/grant-admin")
+    public ResponseEntity<Void> adminPrivileges(@RequestParam Long userId) throws UserIdNotFoundException {
+        authService.giveAdminPrivileges(userId);
         return ResponseEntity.ok().build();
     }
 }

@@ -1,6 +1,6 @@
 package com.microservices.authservice.auth;
 
-import com.microservices.authservice.exception.AuthIdNotFoundException;
+import com.microservices.authservice.exception.UserIdNotFoundException;
 import com.microservices.authservice.jwtAuthoritation.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,24 +29,30 @@ public class AuthService {
                         authenticationDto.getPassword()
                 )
         );
-        var user = authDao.findByUsername(authenticationDto.getUsername())
+        var auth = authDao.findByUsername(authenticationDto.getUsername())
                 .orElseThrow();
-        return jwtService.generateToken(user);
+        return jwtService.generateToken(auth);
     }
 
     public void validateToken(String token) {
         jwtService.isTokenValid(token);
     }
 
-    public void blockUser(Long userId) throws AuthIdNotFoundException {
-        var user = authDao.findByUserId(userId).orElseThrow(AuthIdNotFoundException::new);
-        user.setActive(false);
-        authDao.save(user);
+    public void blockUser(Long userId) throws UserIdNotFoundException {
+        var auth = authDao.findByUserId(userId).orElseThrow(UserIdNotFoundException::new);
+        auth.setActive(false);
+        authDao.save(auth);
     }
 
-    public void unblockUser(Long userId) throws AuthIdNotFoundException {
-        var user = authDao.findByUserId(userId).orElseThrow(AuthIdNotFoundException::new);
-        user.setActive(false);
-        authDao.save(user);
+    public void unblockUser(Long userId) throws UserIdNotFoundException {
+        var auth = authDao.findByUserId(userId).orElseThrow(UserIdNotFoundException::new);
+        auth.setActive(false);
+        authDao.save(auth);
+    }
+
+    public void giveAdminPrivileges(Long userId) throws UserIdNotFoundException {
+        var auth = authDao.findByUserId(userId).orElseThrow(UserIdNotFoundException::new);
+        auth.setAuthority(Role.ADMIN);
+        authDao.save(auth);
     }
 }
