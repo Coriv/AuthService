@@ -9,7 +9,6 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface AuthDao extends CrudRepository<Authentication, Long> {
-
     Optional<Authentication> findByUsername(String username);
-    Optional<Authentication> findByUserId(Long id);
+    Optional<Authentication> findByUserId(Long userId);
 }

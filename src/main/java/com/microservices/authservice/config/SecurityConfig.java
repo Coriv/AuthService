@@ -44,6 +44,7 @@ public class SecurityConfig {
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                //todo add endpoints for admin role
 
                 .and()
                 .authenticationProvider(authenticationProvider)
