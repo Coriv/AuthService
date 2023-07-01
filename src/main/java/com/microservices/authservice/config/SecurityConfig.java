@@ -11,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
@@ -29,12 +30,12 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests()
 
-                .requestMatchers("/auth/register",
-                        "/auth/token",
-                        "/auth/validate")
+                .requestMatchers(GET,
+                        "v1/auth/token",
+                        "v1/auth/validate")
                 .permitAll()
 
-                .requestMatchers(POST, "/v1/user/**")
+                .requestMatchers(POST, "/v1/auth/register")
                 .permitAll()
 
                 .anyRequest()

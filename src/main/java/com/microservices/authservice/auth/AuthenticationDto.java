@@ -1,14 +1,16 @@
 package com.microservices.authservice.auth;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 public class AuthenticationDto {
 
-    private Integer id;
-    private final Long userId;
+    private Long id;
+    private Long userId;
     private String username;
     private String password;
 }

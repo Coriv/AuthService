@@ -13,7 +13,7 @@ public class AuthMapper {
         var auth = authDao.findByUsername(authenticationDto.getUsername())
                 .orElse(new Authentication());
         auth.setUsername(authenticationDto.getUsername());
-        auth.setPassword(auth.getPassword());
+        auth.setPassword(authenticationDto.getPassword());
         auth.setUserId(authenticationDto.getUserId());
         auth.setActive(true);
         auth.setAuthority(Role.USER);
